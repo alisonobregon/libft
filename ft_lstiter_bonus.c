@@ -1,19 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aliobreg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/22 21:34:20 by aliobreg          #+#    #+#             */
+/*   Updated: 2024/10/22 21:36:00 by aliobreg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
-/*Itera la lista ’lst’ y aplica la función ’f’ en el
-contenido de cada nodo*/
-void ft_lstiter(t_list *lst, void (*f)(void *))
+
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-    t_list  *awk;
-    t_list  *pwk;
+	t_list	*awk;
+	t_list	*pwk;
 
-    if(!(awk = lst))
-        return;
-    while(awk)
-    {
-        pwk = awk ->next;
-        if (f)
-            f(awk ->content);
-        awk = pwk;
-    }
-
+	if (!(awk == lst))
+		return ;
+	while (awk)
+	{
+		pwk = awk ->next;
+		if (f)
+			f(awk ->content);
+		awk = pwk;
+	}
 }
