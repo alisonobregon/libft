@@ -13,21 +13,29 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*awk;
-	t_list	*pwk;
+	t_list	*first;
 	t_list	*new;
 
-	if (!(awk == lst))
+	if (!f || !del)
 		return (NULL);
-	new = (t_list)malloc(sizeof(t_list));
-	if (!new)
-		return (NULL);
-	while (awk)
+	first = NULL;
+	while (lst)
 	{
-		pwk = awk ->next;
-		new->content = f(awk ->content);
-		del(awk -> content);
-		awk = pwk;
+		new = ft_lstnew((*f)(lst->content));
+		if (!new)
+		{
+			while (first)
+			{
+				new = first->next;
+				(*del)(first->content);
+				free(first);
+				first = new;
+			}
+			lst = NULL;
+			return (NULL);
+		}
+		ft_lstadd_back(&first, new);
+		lst = lst->next;
 	}
-	return (new);
+	return (first);
 }

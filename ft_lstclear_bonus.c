@@ -13,17 +13,14 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_list	*awk;
 	t_list	*pwk;
 
-	if (!(awk == *lst))
+	if (!del || !lst || *lst)
 		return ;
-	while (awk)
+	while (lst && *lst)
 	{
-		pwk = awk->next;
-		del(awk->content);
-		free(awk);
-		awk = pwk;
+		pwk = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = pwk;
 	}
-	*lst = NULL;
 }

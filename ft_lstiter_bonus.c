@@ -13,16 +13,11 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_list	*awk;
-	t_list	*pwk;
-
-	if (!(awk == lst))
+	if (!f)
 		return ;
-	while (awk)
+	while (lst)
 	{
-		pwk = awk ->next;
-		if (f)
-			f(awk ->content);
-		awk = pwk;
+		(*f)(lst->content);
+		lst = lst->next;
 	}
 }
